@@ -1,0 +1,7 @@
+MONGO_URI=mongodb+srv://hestrain:v3TUsv8tAVyqM7uU@ratinginfo.qanyz.mongodb.net/users?retryWrites=true&w=majority
+
+JWT_SECRET = 420694206942069d1ckf33tf1ckf33tyay
+
+RESEND_API_KEY=re_RMs59rmp_HPjAfa58UVzBasMMiH2fz4p9
+
+CLIENT_URL=http://localhost:5173

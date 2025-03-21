@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
+import { gummySchema } from "./gummy";
 
 const userSchema = new mongoose.Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
@@ -18,6 +19,7 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
+    savedGummies: [gummySchema],
     resetPasswordToken: String,
     resetPasswordExpiresAt: Date,
     verificationToken: String,

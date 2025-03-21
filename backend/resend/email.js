@@ -21,13 +21,13 @@ export const sendVerificationEmail = async (email, verificationToken) => {
   }
 };
 
-export const sendWelcomeEmail = async (email, name) => {
+export const sendWelcomeEmail = async (email, username) => {
   try {
     const { data, error } = await resend.emails.send({
       from: "Acme <onboarding@resend.dev>",
       to: [email],
       subject: "Welcome to our company",
-      html: WELCOME_EMAIL_TEMPLATE.replace("{name}", name),
+      html: WELCOME_EMAIL_TEMPLATE.replace("{username}", username),
     });
   } catch (error) {
     console.log("error sending welcome email", error);

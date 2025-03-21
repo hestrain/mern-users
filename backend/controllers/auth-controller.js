@@ -11,9 +11,9 @@ import {
 import crypto from "crypto";
 
 export const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { username, email, password } = req.body;
   try {
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
     const userAlreadyExists = await User.findOne({ email });
@@ -24,7 +24,7 @@ export const signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
     const verificationToken = generateVerificationToken();
     const user = new User({
-      name,
+      username,
       email,
       password: hashedPassword,
       verificationToken: verificationToken,
@@ -107,7 +107,7 @@ export const verifyEmail = async (req, res) => {
     user.verificationTokenExpiresAt = undefined;
     await user.save();
 
-    await sendWelcomeEmail(user.email, user.name);
+    await sendWelcomeEmail(user.email, user.username);
 
     res
       .status(200)

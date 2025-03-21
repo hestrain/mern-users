@@ -1,28 +1,21 @@
-import express from 'express'
-import { connectToDatabase } from './database/connection.js'
-import dotenv from 'dotenv'
-import cookieParser from 'cookie-parser'
-import authRoutes from './routes/auth-route.js'
-dotenv.config()
+import express from "express";
+import { connectToDatabase } from "./database/connectionToDatabase.js";
+import dotenv from "dotenv";
+import authRoutes from "./routes/auth-route.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
+dotenv.config();
 
-const app = express()
-
-const port = 3000
-
-app.get('/', (req,res) => {
-    res.send('Hi')
-})
-
-
-//middleware
-app.use(express.json())
-app.use('/api/auth', authRoutes)
-app.use(cookieParser())
+const app = express();
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use(express.json()); // for parsing application/json
+app.use(cookieParser()); // for parsing cookies
 
 connectToDatabase();
 
-app.listen(port, () => {
-    console.log(`'server is running on port ${port}`);
-    
-})
+app.use("/api/auth", authRoutes);
+
+app.listen(3000, () => {
+  console.log("Server is running on port 3000");
+});
